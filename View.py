@@ -1,5 +1,6 @@
-
 import tkinter as tk
+from tkinter.filedialog import askopenfilename
+from tkinter import messagebox as mb
 
 class MainApplicationView(tk.Frame):
     '''основное окно, кнопки, поля и прочее'''
@@ -14,16 +15,26 @@ class MainApplicationView(tk.Frame):
         tk.Frame.__init__(self,parent, *args, **kwargs)
         self.parent = parent
 
-        self.label = tk.Label(parent, text="Give values")
-        self.label.grid(row=1)
+        self.label = tk.Label(parent, text="Данные:")
+        self.label.grid(row=3)
 
-        self.field = tk.Text(win, height=45, width=72, wrap='word')
-        self.field.grid(row=3, column=0, columnspan=3)
+        self.field = tk.Text(win, height=40, width=72, wrap='word')
+        self.field.grid(row=4, column=0, columnspan=3)
 
-        self.button1 = tk.Button(text='...').grid(row=0, column=2, stick='we')
-        self.button2 = tk.Button(text='Готово').grid(row=1, column=2,stick='we')
-        self.button3 = tk.Button(text='О программе').grid(row=4, column=0, stick='we')
-        self.button4 = tk.Button(text='Закрыть').grid(row=4, column=1, columnspan=2, stick='we')
+
+        self.button1 = tk.Button(text='добавить').grid(row=0, column=0, stick='we')
+        self.button11 = tk.Button(text='удалить').grid(row=0, column=1, stick='we')
+        self.button12 = tk.Button(text='импорт').grid(row=0, column=2, stick='we')
+
+        self.button2 = tk.Button(text='Показать список').grid(row=1, column=0, columnspan=3,stick='we')
+
+        self.button3 = tk.Button(text='мин').grid(row=2, column=0, stick='we')
+        self.button31 = tk.Button(text='макс').grid(row=2, column=1, stick='we')
+        self.button32 = tk.Button(text='Поиск?').grid(row=2, column=2, stick='we')
+
+
+        self.button4 = tk.Button(text='О программе').grid(row=5, column=0, stick='we')
+        self.button41 = tk.Button(text='Закрыть').grid(row=5, column=1, columnspan=2, stick='we')
 
         self.scroller1 = tk.Scrollbar(win, command=self.field.yview)
         self.scroller1.grid(row=2, column=3, rowspan=2, columnspan=2, stick='ns')
