@@ -50,8 +50,10 @@ class MainApplicationView(tk.Frame):
         self.scroller1 = tk.Scrollbar(parent, command=self.field.yview)
         self.scroller1.grid(row=2, column=3, rowspan=2, columnspan=2, stick='ns')
 
-        #привязка действия (открыть файл) к кнопке 3 в первом ряду
+        #привязка действий:
+        #открыть файл
         self.button12.bind("<Button-1>", self.open_file)
+        #закрыть окно
         self.button41.bind("<Button-1>", self.close_window)
 
     def open_file(self, event):
