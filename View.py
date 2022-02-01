@@ -40,18 +40,27 @@ class MainApplicationView(tk.Frame):
         self.button32 = tk.Button(parent, text='Поиск?').grid(row=2, column=2, stick='we')
 
         # Четвертный ряд
-        self.button4 = tk.Button(parent, text='О программе').grid(row=5, column=0, stick='we')
-        self.button41 = tk.Button(parent, text='Закрыть').grid(row=5, column=1, columnspan=2, stick='we')
+        self.button4 = tk.Button(parent, text='О программе')
+        self.button41 = tk.Button(parent, text='Закрыть')
+
+        # размещение четверого ряда
+        self.button4.grid(row=5, column=0, stick='we')
+        self.button41.grid(row=5, column=1, columnspan=2, stick='we')
 
         self.scroller1 = tk.Scrollbar(parent, command=self.field.yview)
         self.scroller1.grid(row=2, column=3, rowspan=2, columnspan=2, stick='ns')
 
         #привязка действия (открыть файл) к кнопке 3 в первом ряду
         self.button12.bind("<Button-1>", self.open_file)
+        self.button41.bind("<Button-1>", self.close_window)
 
     def open_file(self, event):
-
+        """диалоговое окно для выбора файла"""
         return askopenfilename()
+
+    def close_window(self, event):
+        """закрывает окно"""
+        self.parent.destroy()
 
 
 # параметры окна
