@@ -1,3 +1,9 @@
+from sqlalchemy import create_engine
+
+
+import psycopg2
+from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+
 class Product():
     '''Класс определяющий товары'''
     def __init__(self, name='', price=0, count=0):
@@ -24,6 +30,28 @@ class Product():
     def maxprice(self):
         '''возвращает товар с максимальцой ценой'''
         pass
+
+
+#БД
+
+engine = create_engine("postgresql+psycopg2://postgres:Delovem!1@localhost/sqlalchemy_tuts")
+engine.connect()
+
+connection = psycopg2.connect(user="postgres", password="Delovem!1")
+connection.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+
+cursor = connection.cursor()
+sql_create_database =
+# Создаем базу данных
+cursor.execute('create database 4MprojectDB')
+# Закрываем соединение
+cursor.close()
+connection.close()
+
+#Импорт файла
+
+
+
 
 
 if __name__ == "__main__":
