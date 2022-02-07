@@ -34,19 +34,8 @@ class Product():
 
 #БД
 
-engine = create_engine("postgresql+psycopg2://postgres:Delovem!1@localhost/sqlalchemy_tuts")
-engine.connect()
 
-connection = psycopg2.connect(user="postgres", password="Delovem!1")
-connection.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
 
-cursor = connection.cursor()
-sql_create_database =
-# Создаем базу данных
-cursor.execute('create database 4MprojectDB')
-# Закрываем соединение
-cursor.close()
-connection.close()
 
 #Импорт файла
 
