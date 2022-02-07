@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter.filedialog import askopenfilename
 from tkinter import messagebox as mb
 
+
+#ГУИ ТУТ
 class MainApplicationView(tk.Frame):
     '''основное окно, кнопки, поля и прочее'''
     def __init__(self, parent, *args, **kwargs):
@@ -55,6 +57,8 @@ class MainApplicationView(tk.Frame):
         self.button12.bind("<Button-1>", self.open_file)
         #закрыть окно
         self.button41.bind("<Button-1>", self.close_window)
+        #информационное окно
+        self.button4.bind("<Button-1>", self.about_soft)
 
     def open_file(self, event):
         """диалоговое окно для выбора файла"""
@@ -63,6 +67,18 @@ class MainApplicationView(tk.Frame):
     def close_window(self, event):
         """закрывает окно"""
         self.parent.destroy()
+
+    def about_soft(self, event):
+        """информационное окно"""
+        mb.showinfo(
+            title="О Программе",
+            message='Версия 0.1 beta'
+                    '\n  '
+                    '\nИсходный код: https://github.com/Delovem/4montheducationproject'
+                    '\n  '
+                    '\nДанная программа является учебным проектом и разработана в рамках обучения в компании Forgstream на курсе "Основы Python Сентябрь" в 2021 году'
+                    '\n  '
+                    '\nCopyright (c) Delovem software 2021-2022')
 
 
 # параметры окна
@@ -76,7 +92,7 @@ win.resizable(False, False) # выключил масштабирование о
 MainApplicationView(win).grid()
 win.mainloop()
 
-# class ProductsGUI():
+
 
 
 
