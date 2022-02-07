@@ -14,3 +14,5 @@ class DBproduct(Base):
     title = Column(String(100), nullable=False)
     price = Column(Integer, nullable=False)
     count = Column(Integer, nullable=False)
+
+Base.metadata.create_all(engine)
