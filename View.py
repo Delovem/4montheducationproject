@@ -53,12 +53,18 @@ class MainApplicationView(tk.Frame):
         self.scroller1.grid(row=2, column=3, rowspan=2, columnspan=2, stick='ns')
 
         #привязка действий:
+        self.button1.bind("<Button-1>", self.create_window)
         #открыть файл
         self.button12.bind("<Button-1>", self.open_file)
         #закрыть окно
         self.button41.bind("<Button-1>", self.close_window)
         #информационное окно
         self.button4.bind("<Button-1>", self.about_soft)
+
+    def create_window(self, event):
+        '''второе окно'''
+        win2 = tk.Toplevel(win)
+        win2.geometry('300x300')
 
     def open_file(self, event):
         """диалоговое окно для выбора файла"""
