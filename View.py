@@ -64,7 +64,45 @@ class MainApplicationView(tk.Frame):
     def create_window(self, event):
         '''второе окно'''
         win2 = tk.Toplevel(win)
-        win2.geometry('300x300')
+        win2.geometry('220x95')
+        win.title('bazaar v0.1 beta')
+
+        icon = tk.PhotoImage(file='icon.png')  # на иконке нарисован пакетик
+        win.iconphoto(False, icon)
+        win.resizable(False, False)  # вы
+
+        def get_entry():
+            entry_value1 = win2entry_1.get()
+            entry_value2 = win2entry_2.get()
+            entry_value3 = win2entry_3.get()
+
+            return entry_value1, entry_value2, entry_value3
+
+        def close_window():
+            """закрывает окно"""
+            win2.destroy()
+
+        win2label_1 = tk.Label(win2, text='Наименование').grid(row=0, column=0)
+        win2label_2 = tk.Label(win2, text='Цена').grid(row=1, column=0)
+        win2label_3 = tk.Label(win2, text='Колво').grid(row=2, column=0)
+
+        win2entry_1 = tk.Entry(win2)
+        win2entry_1.grid(row=0, column=1, stick='we')
+        win2entry_2 = tk.Entry(win2)
+        win2entry_2.grid(row=1, column=1, stick='we')
+        win2entry_3 = tk.Entry(win2)
+        win2entry_3.grid(row=2, column=1, stick='we')
+
+        win2button_1 = tk.Button(win2, text='отмена', command=close_window)
+        win2button_1.grid(row=3, column=0, stick='we')
+        win2button_2 = tk.Button(win2, text='Готово', command=get_entry)
+        win2button_2.grid(row=3, column=1, stick='we')
+
+
+
+
+
+
 
     def open_file(self, event):
         """диалоговое окно для выбора файла"""
@@ -87,13 +125,15 @@ class MainApplicationView(tk.Frame):
                     '\nCopyright (c) Delovem software 2021-2022')
 
 
+
+
+
 # параметры окна
 win = tk.Tk()
 win.geometry('600x800')
 win.title('bazaar v0.1 beta')
 icon = tk.PhotoImage(file='icon.png') # на иконке нарисован пакетик
 win.iconphoto(False, icon)
-win.title('bazaar v0.1 beta')
 win.resizable(False, False) # выключил масштабирование окна, на данном этапе оно не нужно.
 MainApplicationView(win).grid()
 win.mainloop()

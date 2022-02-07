@@ -23,11 +23,6 @@ class DBproduct(Base):
 
 Base.metadata.create_all(engine)
 
-#добавление объектов в БД
-
-
-
-
 
 #для вывода таблицы БД в ГУИ
 
@@ -50,7 +45,8 @@ class Product():
         prod = DBproduct(
             title=self.name,
             price=self.price,
-            count=self.count)
+            count=self.count
+        )
 
         session.add(prod)
         session.commit()
