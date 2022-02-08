@@ -75,7 +75,7 @@ class MainApplicationView(tk.Frame):
             entry_value1 = win2entry_1.get()
             entry_value2 = win2entry_2.get()
             entry_value3 = win2entry_3.get()
-
+            #print(entry_value1, entry_value2, entry_value3)
             return entry_value1, entry_value2, entry_value3
 
         def close_window():
@@ -97,7 +97,6 @@ class MainApplicationView(tk.Frame):
         win2button_1.grid(row=3, column=0, stick='we')
         win2button_2 = tk.Button(win2, text='Готово', command=get_entry)
         win2button_2.grid(row=3, column=1, stick='we')
-
 
 
 

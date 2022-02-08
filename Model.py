@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 # взаимодействие с бд
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-
+import View
 #БД
 #на данном этапе заранее создана пустая БД без таблиц итд
 
@@ -22,6 +22,7 @@ class DBproduct(Base):
     count = Column(Integer, nullable=False)
 
 Base.metadata.create_all(engine)
+
 
 
 #для вывода таблицы БД в ГУИ
@@ -64,7 +65,7 @@ class Product():
         pass
 
 
-
+NewProd = Product(View.create_entry)
 
 
 #Импорт файла
