@@ -1,10 +1,13 @@
 import tkinter as tk
 from tkinter.filedialog import askopenfilename
 from tkinter import messagebox as mb
+from Model import Product
 
 #ГУИ ТУТ
 class MainApplicationView(tk.Frame):
     '''основное окно, кнопки, поля и прочее'''
+
+
     def __init__(self, parent, *args, **kwargs):
         '''инициализация класса и содержимое окна
         label - надписи, некликабельные
@@ -38,13 +41,13 @@ class MainApplicationView(tk.Frame):
         self.entry3.grid(row=2, column=1, columnspan=1, stick='we')
 
         #кнопки
-        self.button1 = tk.Button(parent, text='Добавить')
+        self.button1 = tk.Button(parent, text='Добавить', command=self.add_product_to_bd)
         self.button1.grid(row=3, column=0, columnspan=2, stick='we')
 
         self.button2 = tk.Button(parent, text='Удалить')
         self.button2.grid(row=4, column=0, columnspan=2, stick='we')
 
-        self.button3 = tk.Button(parent, text='Импорт')
+        self.button3 = tk.Button(parent, text='Импорт', command=self.open_file)
         self.button3.grid(row=0, column=2, columnspan=3, stick='we')
 
         self.button4 = tk.Button(parent, text='Поиск')
@@ -53,10 +56,10 @@ class MainApplicationView(tk.Frame):
         self.button5 = tk.Button(parent, text='Вывод')
         self.button5.grid(row=2, column=2, columnspan=3, rowspan=3, sticky='nswe')
 
-        self.button6 = tk.Button(parent, text='О программе')
+        self.button6 = tk.Button(parent, text='О программе', command=self.about_soft)
         self.button6.grid(row=6, column=0, stick='we')
 
-        self.button7 = tk.Button(parent, text='Закрыть')
+        self.button7 = tk.Button(parent, text='Закрыть', command=self.close_window)
         self.button7.grid(row=6, column=3, columnspan=2, stick='we')
 
         #полоса прокрутки
@@ -65,15 +68,15 @@ class MainApplicationView(tk.Frame):
 
 
 
-    def open_file(self, event):
+    def open_file(self):
         """диалоговое окно для выбора файла"""
         return askopenfilename()
 
-    def close_window(self, event):
+    def close_window(self):
         """закрывает окно"""
         self.parent.destroy()
 
-    def about_soft(self, event):
+    def about_soft(self):
         """информационное окно"""
         mb.showinfo(
             title="О Программе",
@@ -86,8 +89,25 @@ class MainApplicationView(tk.Frame):
                     '\nCopyright (c) Delovem software 2021-2022')
 
 
+    def get_entry1(self):
+        entry_value1 = self.entry1.get()
+        return entry_value1
 
+    def get_entry2(self):
+        entry_value2 = self.entry2.get()
+        return entry_value2
 
+    def get_entry3(self):
+        entry_value3 = self.entry3.get()
+        return entry_value3
+
+    def add_product_to_bd(self):
+        name = self.get_entry1()
+        price = self.get_entry2()
+        count = self.get_entry3()
+
+        new_product = Product(name, price, count)
+        new_product.add_product()
 
 # параметры окна
 win = tk.Tk()
