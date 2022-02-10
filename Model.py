@@ -21,11 +21,24 @@ class DBproduct(Base):
     price = Column(Integer, nullable=False)
     count = Column(Integer, nullable=False)
 
+    def __repr__(self):
+        return f'\nid:{self.id} |title:{self.title} |price:{self.price} |count:{self.count}'
+
 Base.metadata.create_all(engine)
 
 
-
 #для вывода таблицы БД в ГУИ
+
+#полный текст
+session = Session(bind=engine)
+fulltable = session.query(DBproduct).all()
+print(fulltable)
+
+#фильтр по названию(для поиска) #пока в бете
+
+# filteredbytitle = session.query(DBproduct).filter(DBproduct.title == 'биба').all()
+# print(filteredbytitle)
+
 
 #РАБОЧИЙ КЛАСС
 class Product():

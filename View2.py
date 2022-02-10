@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter.filedialog import askopenfilename
 from tkinter import messagebox as mb
+
+import Model
 from Model import Product
 
 #ГУИ ТУТ
@@ -47,13 +49,13 @@ class MainApplicationView(tk.Frame):
         self.button2 = tk.Button(parent, text='Удалить')
         self.button2.grid(row=4, column=0, columnspan=2, stick='we')
 
-        self.button3 = tk.Button(parent, text='Импорт', command=self.open_file)
+        self.button3 = tk.Button(parent, text='Поиск')
         self.button3.grid(row=0, column=2, columnspan=3, stick='we')
 
-        self.button4 = tk.Button(parent, text='Поиск')
+        self.button4 = tk.Button(parent, text='Импорт', command=self.open_file)
         self.button4.grid(row=1, column=2, columnspan=3, stick='we')
 
-        self.button5 = tk.Button(parent, text='Вывод')
+        self.button5 = tk.Button(parent, text='Вывод', command=self.field_output)
         self.button5.grid(row=2, column=2, columnspan=3, rowspan=3, sticky='nswe')
 
         self.button6 = tk.Button(parent, text='О программе', command=self.about_soft)
@@ -88,7 +90,7 @@ class MainApplicationView(tk.Frame):
                     '\n  '
                     '\nCopyright (c) Delovem software 2021-2022')
 
-
+    #3 функции для захвата текста с полей ввода
     def get_entry1(self):
         entry_value1 = self.entry1.get()
         return entry_value1
@@ -102,12 +104,24 @@ class MainApplicationView(tk.Frame):
         return entry_value3
 
     def add_product_to_bd(self):
+        '''создает экземпляр класса Product и сразу добавляет в таблицу в БД'''
         name = self.get_entry1()
         price = self.get_entry2()
         count = self.get_entry3()
 
         new_product = Product(name, price, count)
         new_product.add_product()
+
+    def field_output(self):
+        '''выводит таблицу из БД в поле field'''
+        textoutput = Model.session.query(Model.DBproduct).all()
+        self.field.delete(1.0, tk.END)
+        self.field.insert(1.0, (textoutput))
+
+
+    def search(self):
+        '''поиск по значению с поля ввода entry1 (наименование, Product.title)'''
+        pass
 
 # параметры окна
 win = tk.Tk()
