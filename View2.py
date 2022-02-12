@@ -123,6 +123,14 @@ class MainApplicationView(tk.Frame):
         price = self.get_entry2()
         count = self.get_entry3()
 
+        if price.isdigit() == False:
+            msg = 'В поле цена должно быть целое число'
+            mb.showwarning("Предупреждение", msg)
+
+        if count.isdigit() == False:
+            msg = 'В поле колво должно быть целое число'
+            mb.showwarning("Предупреждение", msg)
+
         new_product = Product(name, price, count)
         new_product.add_product()
         Model.session.commit()
