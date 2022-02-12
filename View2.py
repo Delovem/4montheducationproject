@@ -137,7 +137,14 @@ class MainApplicationView(tk.Frame):
 
     def delete_product_from_bd(self):
         '''удаляет из БД по имени введенному в entry1 (Наименование, Product.title)'''
+
         name = self.get_entry1()
+
+        if name == '':
+            msg = ' введите наименование'
+            mb.showwarning("Предупреждение", msg)
+
+
         i = Model.session.query(Model.DBproduct).filter(Model.DBproduct.title == name).one()
         Model.session.delete(i)
         Model.session.commit()
@@ -204,15 +211,15 @@ class MainApplicationView(tk.Frame):
         self.field.insert(1.0, (textoutput))
 
 
+if __name__ == "__main__":
 
-
+    win = tk.Tk()
+    win.geometry('600x805')
+    win.title('bazaar v0.1 beta')
+    icon = tk.PhotoImage(file='icon.png')  # на иконке нарисован пакетик
+    win.iconphoto(False, icon)
+    win.resizable(False, False)  # выключил масштабирование окна, на данном этапе оно не нужно.
+    MainApplicationView(win).grid()
+    win.mainloop()
 
 # параметры окна
-win = tk.Tk()
-win.geometry('600x805')
-win.title('bazaar v0.1 beta')
-icon = tk.PhotoImage(file='icon.png') # на иконке нарисован пакетик
-win.iconphoto(False, icon)
-win.resizable(False, False) # выключил масштабирование окна, на данном этапе оно не нужно.
-MainApplicationView(win).grid()
-win.mainloop()

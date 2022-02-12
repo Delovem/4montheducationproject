@@ -74,4 +74,4 @@ class Product:
 
 if __name__ == "__main__":
     Velociped = Product("Велосипед", 500, 4)
-    Cow = Product("Корова", 3000, 6)
+
