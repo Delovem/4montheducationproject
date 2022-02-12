@@ -8,16 +8,16 @@ from Model import Product
 
 # ГУИ ТУТ
 class MainApplicationView(tk.Frame):
-    '''основное окно, кнопки, поля и прочее'''
+    """основное окно, кнопки, поля и прочее"""
 
     def __init__(self, parent, *args, **kwargs):
-        '''инициализация класса и содержимое окна
+        """инициализация класса и содержимое окна
         label - надписи, некликабельные
         field - поле вывода
         button - кнопки
         scroller1 - полоса прокрутки справа от поля field. на win 11 может выглядеть криво
 
-        '''
+        """
         tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
 
@@ -83,7 +83,7 @@ class MainApplicationView(tk.Frame):
 
     def open_file(self):
         """диалоговое окно для выбора файла"""
-        return askopenfilename()
+        askopenfilename()
 
     def close_window(self):
         """закрывает окно"""
