@@ -4,6 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 # взаимодействие с бд
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
+from sqlalchemy import desc
 
 #БД
 #на данном этапе заранее создана пустая БД без таблиц итд
@@ -32,7 +33,7 @@ Base.metadata.create_all(engine)
 #полный текст
 session = Session(bind=engine)
 fulltable = session.query(DBproduct).all()
-print(fulltable)
+
 
 #фильтр по названию(для поиска) #пока в бете
 
@@ -41,10 +42,10 @@ print(fulltable)
 
 
 #РАБОЧИЙ КЛАСС
-class Product():
+class Product:
     '''Класс определяющий товары'''
     def __init__(self, name='', price=0, count=0):
-        '''инициализация класса'''
+        '''конструктор'''
         self.name = name
         self.price = price
         self.count = count
@@ -64,21 +65,6 @@ class Product():
 
         session.add(prod)
         session.commit()
-
-    def delete_product(self):
-        '''удаление товара из списка'''
-        pass
-
-    def minprice(self):
-        '''возвращает товар с минимальной ценой'''
-        pass
-
-    def maxprice(self):
-        '''возвращает товар с максимальцой ценой'''
-        pass
-
-
-
 
 #Импорт файла
 
