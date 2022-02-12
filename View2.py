@@ -97,7 +97,8 @@ class MainApplicationView(tk.Frame):
                     '\n  '
                     '\nИсходный код: https://github.com/Delovem/4montheducationproject'
                     '\n  '
-                    '\nДанная программа является учебным проектом и разработана в рамках обучения в компании Forgstream на курсе "Основы Python Сентябрь" в 2021 году'
+                    '\nДанная программа является учебным проектом и разработана в рамках обучения в компании '
+                    'Forgstream на курсе "Основы Python Сентябрь" в 2021 году '
                     '\n  '
                     '\nCopyright (c) Delovem software 2021-2022')
 
@@ -115,7 +116,7 @@ class MainApplicationView(tk.Frame):
         return entry_value3
 
     def add_product_to_bd(self):
-        '''создает экземпляр класса Product и сразу добавляет в таблицу в БД'''
+        """создает экземпляр класса Product и сразу добавляет в таблицу в БД"""
         name = self.get_entry1()
         price = self.get_entry2()
         count = self.get_entry3()
@@ -133,7 +134,7 @@ class MainApplicationView(tk.Frame):
         Model.session.commit()
 
     def delete_product_from_bd(self):
-        '''удаляет из БД по имени введенному в entry1 (Наименование, Product.title)'''
+        """удаляет из БД по имени введенному в entry1 (Наименование, Product.title)"""
 
         name = self.get_entry1()
 
@@ -146,15 +147,15 @@ class MainApplicationView(tk.Frame):
         Model.session.commit()
 
     def field_output(self):
-        '''выводит таблицу из БД в поле field'''
+        """выводит таблицу из БД в поле field"""
         textoutput = Model.session.query(Model.DBproduct).all()
         Model.session.commit()
         self.field.delete(1.0, tk.END)
-        self.field.insert(1.0, (textoutput))
+        self.field.insert(1.0, textoutput)
 
     def search_by_name(self):
-        '''поиск по значению с поля ввода entry1 (наименование, Product.title)
-        РАБОТАЕТ по нажатию на кнопку поиск, если что-нибудь введено в поле etnry1'''
+        """поиск по значению с поля ввода entry1 (наименование, Product.title)
+        РАБОТАЕТ по нажатию на кнопку поиск, если что-нибудь введено в поле etnry1"""
         self.entry2.delete(0, tk.END)  # очистка поля ввода цена
         self.entry3.delete(0, tk.END)  # очистка поля ввода колво
         name = self.get_entry1()
@@ -163,16 +164,16 @@ class MainApplicationView(tk.Frame):
         self.field.insert(1.0, (textoutput))
 
     def search_by_count(self):
-        '''поиск по значению с поля ввода entry2 (Кол-во, Product.count)
-        ПОКА НЕ РАБОТАЕТ'''
+        """поиск по значению с поля ввода entry2 (Кол-во, Product.count)
+        ПОКА НЕ РАБОТАЕТ"""
         name = self.get_entry2()
         textoutput = Model.session.query(Model.DBproduct).filter(Model.DBproduct.count == name).all()
         self.field.delete(1.0, tk.END)
         self.field.insert(1.0, (textoutput))
 
     def search_by_price(self):
-        '''поиск по значению с поля ввода entry3 (Цена, Product.price)
-        ПОКА НЕ РАБОТАЕТ'''
+        """поиск по значению с поля ввода entry3 (Цена, Product.price)
+        ПОКА НЕ РАБОТАЕТ"""
         name = self.get_entry3()
         textoutput = Model.session.query(Model.DBproduct).filter(Model.DBproduct.price == name).all()
         self.field.delete(1.0, tk.END)
