@@ -5,10 +5,10 @@ from tkinter import messagebox as mb
 import Model
 from Model import Product
 
-#ГУИ ТУТ
+
+# ГУИ ТУТ
 class MainApplicationView(tk.Frame):
     '''основное окно, кнопки, поля и прочее'''
-
 
     def __init__(self, parent, *args, **kwargs):
         '''инициализация класса и содержимое окна
@@ -18,25 +18,24 @@ class MainApplicationView(tk.Frame):
         scroller1 - полоса прокрутки справа от поля field. на win 11 может выглядеть криво
 
         '''
-        tk.Frame.__init__(self,parent, *args, **kwargs)
+        tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
 
-        #поле
+        # поле
         self.field = tk.Text(parent, height=39, width=72, wrap='word')
         self.field.grid(row=6, column=0, columnspan=5)
 
-
-        #надписи
+        # надписи
         self.label1 = tk.Label(parent, text="наименование:")
         self.label1.grid(row=0, column=0, stick='we')
         self.label2 = tk.Label(parent, text="цена:")
         self.label2.grid(row=1, column=0, stick='we')
         self.label3 = tk.Label(parent, text="количество:")
         self.label3.grid(row=2, column=0, stick='we')
-        self.label4 = tk.Label(parent, text='Сортировать')
+        self.label4 = tk.Label(parent, text='Сортировать:')
         self.label4.grid(row=5, column=0, sticky='we')
 
-        #поля ввода
+        # поля ввода
         self.entry1 = tk.Entry(parent)
         self.entry1.grid(row=0, column=1, columnspan=1, stick='we')
         self.entry2 = tk.Entry(parent)
@@ -44,7 +43,7 @@ class MainApplicationView(tk.Frame):
         self.entry3 = tk.Entry(parent)
         self.entry3.grid(row=2, column=1, columnspan=1, stick='we')
 
-        #кнопки
+        # кнопки
         self.button1 = tk.Button(parent, text='Добавить', command=self.add_product_to_bd)
         self.button1.grid(row=3, column=0, columnspan=2, stick='we')
 
@@ -78,11 +77,9 @@ class MainApplicationView(tk.Frame):
         self.button11 = tk.Button(parent, text='кол-во /\\', command=self.sort_by_count_asc)
         self.button11.grid(row=5, column=4, sticky='we')
 
-        #полоса прокрутки
+        # полоса прокрутки
         self.scroller1 = tk.Scrollbar(parent, command=self.field.yview)
         self.scroller1.grid(row=4, column=5, rowspan=5, stick='ns')
-
-
 
     def open_file(self):
         """диалоговое окно для выбора файла"""
@@ -104,7 +101,7 @@ class MainApplicationView(tk.Frame):
                     '\n  '
                     '\nCopyright (c) Delovem software 2021-2022')
 
-    #3 функции для захвата текста с полей ввода
+    # 3 функции для захвата текста с полей ввода
     def get_entry1(self):
         entry_value1 = self.entry1.get()
         return entry_value1
@@ -144,7 +141,6 @@ class MainApplicationView(tk.Frame):
             msg = ' введите наименование'
             mb.showwarning("Предупреждение", msg)
 
-
         i = Model.session.query(Model.DBproduct).filter(Model.DBproduct.title == name).one()
         Model.session.delete(i)
         Model.session.commit()
@@ -156,12 +152,11 @@ class MainApplicationView(tk.Frame):
         self.field.delete(1.0, tk.END)
         self.field.insert(1.0, (textoutput))
 
-
     def search_by_name(self):
         '''поиск по значению с поля ввода entry1 (наименование, Product.title)
         РАБОТАЕТ по нажатию на кнопку поиск, если что-нибудь введено в поле etnry1'''
-        self.entry2.delete(0, tk.END) # очистка поля ввода цена
-        self.entry3.delete(0, tk.END) # очистка поля ввода колво
+        self.entry2.delete(0, tk.END)  # очистка поля ввода цена
+        self.entry3.delete(0, tk.END)  # очистка поля ввода колво
         name = self.get_entry1()
         textoutput = Model.session.query(Model.DBproduct).filter(Model.DBproduct.title == name).all()
         self.field.delete(1.0, tk.END)
@@ -183,14 +178,12 @@ class MainApplicationView(tk.Frame):
         self.field.delete(1.0, tk.END)
         self.field.insert(1.0, (textoutput))
 
-
-    #сортировки
+    # сортировки
     def sort_by_price_asc(self):
         '''по цене по возрастанию'''
         textoutput = Model.session.query(Model.DBproduct).order_by(Model.DBproduct.price).all()
         self.field.delete(1.0, tk.END)
         self.field.insert(1.0, (textoutput))
-
 
     def sort_by_price_desc(self):
         '''по цене по убыванию'''
@@ -211,7 +204,11 @@ class MainApplicationView(tk.Frame):
         self.field.insert(1.0, (textoutput))
 
 
-if __name__ == "__main__":
+def start_gui():
+    '''запуск GUI с заданными параметрами
+    geomerty - размер
+    title - название
+    '''
 
     win = tk.Tk()
     win.geometry('600x805')
@@ -222,4 +219,6 @@ if __name__ == "__main__":
     MainApplicationView(win).grid()
     win.mainloop()
 
-# параметры окна
+
+if __name__ == "__main__":
+    start_gui()
