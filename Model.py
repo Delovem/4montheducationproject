@@ -68,7 +68,8 @@ class Product:
 
 #Импорт файла
 
-
+def file_import():
+    pass
 
 
 
