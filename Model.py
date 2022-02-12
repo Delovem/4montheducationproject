@@ -4,6 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 # взаимодействие с бд
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
+from sqlalchemy import desc
 
 #БД
 #на данном этапе заранее создана пустая БД без таблиц итд
@@ -32,7 +33,7 @@ Base.metadata.create_all(engine)
 #полный текст
 session = Session(bind=engine)
 fulltable = session.query(DBproduct).all()
-print(fulltable)
+
 
 #фильтр по названию(для поиска) #пока в бете
 
@@ -41,7 +42,7 @@ print(fulltable)
 
 
 #РАБОЧИЙ КЛАСС
-class Product():
+class Product:
     '''Класс определяющий товары'''
     def __init__(self, name='', price=0, count=0):
         '''инициализация класса'''
