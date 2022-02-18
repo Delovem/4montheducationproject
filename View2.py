@@ -5,6 +5,13 @@ from tkinter import messagebox as mb
 import Model
 from Model import Product
 
+import logging
+import datetime
+
+#logger
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger('MyLog')
+
 
 # ГУИ ТУТ
 class MainApplicationView(tk.Frame):
@@ -133,6 +140,8 @@ class MainApplicationView(tk.Frame):
         new_product.add_product()
         Model.session.commit()
 
+        logger.info(f'{datetime.datetime.now()} Product {new_product.name} added')
+
     def delete_product_from_bd(self):
         """удаляет из БД по имени введенному в entry1 (Наименование, Product.title)"""
 
@@ -145,6 +154,8 @@ class MainApplicationView(tk.Frame):
         i = Model.session.query(Model.DBproduct).filter(Model.DBproduct.title == name).one()
         Model.session.delete(i)
         Model.session.commit()
+
+        logger.info(f'{datetime.datetime.now()} Product {name} deleted')
 
     def field_output(self):
         """выводит таблицу из БД в поле field"""

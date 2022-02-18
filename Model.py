@@ -4,7 +4,10 @@ from sqlalchemy.ext.declarative import declarative_base
 # взаимодействие с бд
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from sqlalchemy import desc
+
+
+
+
 
 #БД
 #на данном этапе заранее создана пустая БД без таблиц итд
@@ -66,6 +69,8 @@ class Product:
         session.add(prod)
         session.commit()
 
+
+
 #Импорт файла
 
 def file_import():
@@ -73,6 +78,6 @@ def file_import():
 
 
 
-if __name__ == "__main__":
-    Velociped = Product("Велосипед", 500, 4)
+# if __name__ == "__main__":
+#     Velociped = Product("Велосипед", 500, 4)
 
